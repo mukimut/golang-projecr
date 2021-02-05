@@ -118,8 +118,9 @@ func getNgnixBlocks(allBlocks []*ngninxBlock, config string) *ngnixBlocks {
 	return &ngnixBlocks{&foundBlocks, &foundLines}
 }
 
-func testPrinter(line string, value int) {
+func testPrinter(line string, value int) string {
 	fmt.Print("Text is " + line + "|| ")
 	fmt.Print("Value is: ")
 	fmt.Println(value)
+	return line
 }
