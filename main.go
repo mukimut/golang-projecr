@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -43,11 +44,28 @@ func main() {
 		i++
 	}
 
-	searchResult := getNgnixBlocks(blockList, "80")
+	searchResult := getNgnixBlocks(blockList, "www.domain2.com")
 
 	for _, line := range *searchResult.allLines {
 		var lineString string = *line
 		fmt.Println(lineString)
+	}
+
+	// printBlocDetails(blockList, 0)
+}
+
+func printBlocDetails(blocks []*ngninxBlock, nestedLevel int) {
+	for _, block := range blocks {
+		var lines []*string = *block.AllLines
+		length := len(lines)
+		fmt.Println("Level: " + strconv.Itoa(nestedLevel))
+		fmt.Println("Start " + strconv.Itoa(block.Start) + ": " + *lines[0])
+		fmt.Println("End " + strconv.Itoa(block.End) + ": " + *lines[length-1])
+		fmt.Println("---------------------------")
+
+		if block.totalBlocks > 0 {
+			printBlocDetails(block.NestedBlocks, nestedLevel+1)
+		}
 	}
 }
 
