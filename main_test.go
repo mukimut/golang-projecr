@@ -43,10 +43,6 @@ func TestBlockCreation(t *testing.T) {
 		t.Errorf(*lines[block.NestedBlocks[0].Start-1]+" || %d", block.Start)
 	}
 
-	if !strings.Contains(*lines[block.NestedBlocks[0].Start-1], "{") {
-		t.Errorf(*lines[block.NestedBlocks[0].Start-1]+" || %d", block.Start)
-	}
-
 	blocks := getNgnixBlocks(blockList, "www.domain1.com")
 	var allLines *[]*string = blocks.allLines
 
